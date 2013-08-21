@@ -1,5 +1,5 @@
 require.config
-	baseUrl: ""
+	baseUrl: "/js/"
 	waitSeconds: 15
 	paths:
 		jquery: "http://cdn.jsdelivr.net/jquery/2.0.3/jquery-2.0.3.min"

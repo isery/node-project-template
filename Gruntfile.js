@@ -32,7 +32,7 @@ module.exports = function(grunt) {
 					'level': 'ignore'
 				}
 			},
-			app: ['app.coffee', 'lib/*.coffee', 'test/**/*.coffee', 'controller/**/*.coffee', 'public/**/*.coffee']
+			app: ['index.coffee', 'lib/*.coffee', 'test/**/*.coffee', 'controller/**/*.coffee', 'public/**/*.coffee']
 		},
 		karma: {
 			unit: {
@@ -69,19 +69,32 @@ module.exports = function(grunt) {
 				}
 		},
 		watch: {
-			files: ['app.coffee', 'lib/*.coffee', 'test/**/*.coffee', 'controller/**/*.coffee','public/**/*.coffee', 'public/css/dev/**/*.css'],
+			files: ['index.coffee', 'lib/*.coffee', 'test/**/*.coffee', 'controller/**/*.coffee','public/**/*.coffee', 'public/css/dev/**/*.css'],
 			tasks: ['coffeelint', 'mochaTest', 'concat:cssToMain', 'coffee']
 		},
 		coffee: {
-				compile_lib: {
-					expand: true,
-					flatten: true,
-					cwd: 'lib/',
-					src: ['*.coffee'],
-					dest: 'lib/',
-					ext: '.js'
-				},
-			compile_controller: {
+			compile_lib: {
+				expand: true,
+				flatten: true,
+				cwd: 'lib/',
+				src: ['*.coffee'],
+				dest: 'lib/',
+				ext: '.js'
+			},
+			compile_app : {
+				files: {
+					'index.js': 'index.coffee'
+				}
+			},
+			compile_frontend: {
+				expand: true,
+				flatten: false,
+				cwd: 'public/js/',
+				src: ['**/*.coffee'],
+				dest: 'public/js/',
+				ext: '.js'
+			},
+			compile_controller: {
 				expand: true,
 				flatten: true,
 				cwd: 'controller/',
@@ -95,7 +108,18 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		clean: ["lib/*.js", "controller/*.js", 'config/*.js', 'app.js'],
+		clean: {
+				all: [
+					"lib/*.js",
+					"controller/*.js",
+					'config/*.js',
+					'index.js',
+					'public/js/**/*.js',
+					'!public/js/main.js',
+					'!public/js/optimized.js',
+					'!public/js/vendor/**/*.js'
+					]
+		},
 		mochaTest: {
 			files: ['test/**/*.coffee', 'test/**/*.coffee']
 		},

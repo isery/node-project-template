@@ -13,7 +13,7 @@ module.exports = (config) ->
 
 	#requirejs config file for testing
 		files: ["config/requirejs_testing.coffee",
-			pattern: "public/vendor/**/*.js"
+			pattern: "public/js/vendor/**/*.js"
 			included: false
 		,
 			pattern: "public/js/tests/**/*.coffee"
