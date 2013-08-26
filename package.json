@@ -18,10 +18,12 @@
     "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-coffeelint": "0.0.7",
-    "chai": "~1.7.2"
+    "chai": "~1.7.2",
+    "grunt-contrib-less": "~0.7.0"
   },
-  "scripts": {
-    "start": "node app",
+   "scripts": {
+    "prestart": "grunt production",
+    "start": "node index",
     "test": "grunt test"
   },
   "repository": {
