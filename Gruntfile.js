@@ -23,11 +23,15 @@ module.exports = function(grunt) {
 				'indentation': {
 					'level': 'ignore'
 				}
+				,
+				'max_line_length': {
+					'level': 'ignore'
+				}
 			},
-			app: ['index.coffee', 'lib/*.coffee', 'test/**/*.coffee', 'controller/**/*.coffee', 'public/**/*.coffee']
+			app: ['index.coffee', 'libs/*.coffee', 'tests/**/*.coffee', 'controllers/**/*.coffee', 'public/**/*.coffee']
 		},
 		karma: {
-			unit: {
+			single: {
 				configFile: 'config/karma.coffee',
 				singleRun: true
 			},
@@ -47,38 +51,38 @@ module.exports = function(grunt) {
 			}
 		},
 		copy: {
-				deployJavascript: {
+				production: {
 					files: [
 						{src: ['public/js/optimized.js'], dest: 'public/js/main.js', filter: 'isFile'}
 					]
 				},
-				devJavascript: {
+				development: {
 					files: [
 						{src: ['config/requirejs.js'], dest: 'public/js/main.js', filter: 'isFile'}
 					]
 				}
 		},
 		concat: {
-				cssToMain: {
+				allLessFilesToOneMain: {
 					src: ['public/css/dev/**/*.less'],
 					dest: 'public/css/main.less'
 				}
 		},
 		coffee: {
-				compile_lib: {
+				compile_libs: {
 					expand: true,
 					flatten: true,
-					cwd: 'lib/',
+					cwd: 'libs/',
 					src: ['*.coffee'],
-					dest: 'lib/',
+					dest: 'libs/',
 					ext: '.js'
 				},
-			compile_controller: {
+			compile_controllers: {
 				expand: true,
 				flatten: true,
-				cwd: 'controller/',
+				cwd: 'controllers/',
 				src: ['*.coffee'],
-				dest: 'controller/',
+				dest: 'controllers/',
 				ext: '.js'
 			},
 			compile_config : {
@@ -87,32 +91,30 @@ module.exports = function(grunt) {
 					'config/requirejs.js': 'config/requirejs.coffee'
 				}
 			},
-			compile_app : {
+			compile_index : {
 				files: {
 					'index.js': 'index.coffee'
 				}
 			}
 		},
 		clean: {
-			all: [
-				'lib/*.js',
-				'controller/*.js',
+			allJavascriptFiles: [
+				'libs/*.js',
+				'controllers/*.js',
 				'config/*.js',
 				'index.js',
 				'public/js/**/*.js',
-				'!public/js/main.js',
-				'!public/js/optimized.js',
 				'!public/js/vendor/*.js'
 			]
 		},
 		mochaTest: {
-			files: ['test/**/*.coffee', 'test/**/*.coffee']
-		},
-		mochaTestConfig: {
-			options: {
-				reporter: 'nyan',
-				compilers: 'coffee-script',
-				timeout: '3000'
+			allServerTests: {
+				options: {
+					reporter: 'nyan',
+					compilers: 'coffee-script',
+					timeout: '3000'
+				},
+				src: ['tests/server/**/*.coffee']
 			}
 		},
 		less: {
@@ -131,7 +133,7 @@ module.exports = function(grunt) {
 			}
 		},
 		watch: {
-			files: ['index.coffee', 'lib/*.coffee', 'test/**/*.coffee', 'controller/**/*.coffee','public/**/*.coffee', 'public/css/dev/**/*.less'],
+			files: ['index.coffee', 'libs/*.coffee', 'tests/**/*.coffee', 'controllers/**/*.coffee','public/**/*.coffee', 'public/css/dev/**/*.less'],
 			tasks: ['coffeelint', 'mochaTest', 'concat:cssToMain','less:development', 'coffee', 'karma:unit']
 		}
 	});
@@ -148,8 +150,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
-	grunt.registerTask('test', ['env:development', 'coffeelint', 'coffee', 'mochaTest', 'karma:unit']);
-	grunt.registerTask('production', ['env:production','coffee', 'requirejs', 'copy:deployJavascript', 'concat:cssToMain', 'less:production']);
-	grunt.registerTask('development', ['env:development', 'coffee', 'copy:devJavascript', 'concat:cssToMain', 'less:development']);
+	grunt.registerTask('test', ['env:development', 'coffeelint', 'coffee', 'mochaTest', 'karma:single']);
+	grunt.registerTask('production', ['env:production','coffee','copy:development', 'requirejs', 'copy:production', 'concat:allLessFilesToOneMain', 'less:production']);
+	grunt.registerTask('development', ['env:development', 'coffee', 'copy:development', 'concat:allLessFilesToOneMain', 'less:development']);
 	grunt.registerTask('default', ['test', 'development',  'watch', 'clean']);
 };

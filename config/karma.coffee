@@ -16,14 +16,17 @@ module.exports = (config) ->
 			pattern: "public/js/vendor/**/*.js"
 			included: false
 		,
-			pattern: "public/js/tests/**/*.coffee"
+			pattern: "public/js/**/*.js"
+			included: false
+		,
+			pattern: "tests/client/**/*.coffee"
 			included: false
 		]
 
 	# list of files to exclude
 
 	#this is the deploy require config file
-		exclude: ["public/js/main.js"]
+		exclude: ["public/js/main.js","public/js/optimized.js"]
 		preprocessors:
 			"**/*.coffee": ["coffee"]
 
@@ -53,7 +56,7 @@ module.exports = (config) ->
 	# - Safari (only Mac)
 	# - PhantomJS
 	# - IE (only Windows)
-		browsers: ["Chrome"]
+		browsers: ["PhantomJS"]
 
 	# If browser does not capture in given timeout [ms], kill it
 		captureTimeout: 60000
