@@ -1,8 +1,7 @@
 chai = require 'chai'
 expect = chai.expect
 request = require 'supertest'
-server = require '../../index'
-console.log server
+server = require '../../libs/app'
 newRequest = request server
 
 describe 'Rest API', ->

@@ -11,5 +11,3 @@ npm start -> will execute grunt production and then run index
 
 For Development
 grunt -> will grunt test, grunt development and grunt watch
-
-
