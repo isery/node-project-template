@@ -4,11 +4,14 @@ Module dependencies.
 express = require("express")
 http = require("http")
 path = require("path")
-app = express()
+
+fileloader = require("./libs/fileloader")
+loadFilesFor = fileloader __dirname, 'js'
+routes = require("./routes")
+app = module.exports = express()
 
 
 # all environments
-app.set "port", process.env.PORT or 3000
 app.set "views", __dirname + "/views"
 app.set "view engine", "jade"
 app.use express.favicon()
@@ -22,7 +25,14 @@ app.use express.static(path.join(__dirname, "public"))
 # development only
 app.use express.errorHandler()  if "development" is app.get("env")
 
-http.createServer(app).listen app.get("port"), ->
-	console.log "Express server listening on port " + app.get("port")
 
-module.exports = app
+# An Array with all Mongoose Model Objects
+models = loadFilesFor('models')
+
+# Require all available controllers
+controllers = loadFilesFor('controllers')
+
+# Require all available middlewares
+middlewares = loadFilesFor('middlewares')
+
+routes(app, controllers, middlewares)

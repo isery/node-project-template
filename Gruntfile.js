@@ -27,7 +27,7 @@ module.exports = function(grunt) {
 					'level': 'ignore'
 				}
 			},
-			app: ['index.coffee', 'libs/*.coffee', 'tests/**/*.coffee', 'controllers/**/*.coffee', 'public/**/*.coffee', 'models/**/*.coffee' , 'middlewares/**/*.coffee']
+			app: ['index.coffee', 'tests/**/*.coffee', 'app/**/ *.coffee', 'public/**/*.coffee']
 		},
 		karma: {
 			single: {
@@ -68,28 +68,12 @@ module.exports = function(grunt) {
 				}
 		},
 		coffee: {
-				compile_libs: {
-					expand: true,
-					flatten: true,
-					cwd: 'libs/',
-					src: ['*.coffee'],
-					dest: 'libs/',
-					ext: '.js'
-				},
-			compile_controllers: {
+			compile_app: {
 				expand: true,
-				flatten: true,
-				cwd: 'controllers/',
-				src: ['*.coffee'],
-				dest: 'controllers/',
-				ext: '.js'
-			},
-			compile_models: {
-				expand: true,
-				flatten: true,
-				cwd: 'models/',
-				src: ['*.coffee'],
-				dest: 'models/',
+				flatten: false,
+				cwd: 'app/',
+				src: ['./**/*.coffee'],
+				dest: 'app/',
 				ext: '.js'
 			},
 			compile_config : {
@@ -105,11 +89,10 @@ module.exports = function(grunt) {
 		},
 		clean: {
 			allJavascriptFiles: [
-				'libs/*.js',
-				'controllers/*.js',
+				'app/**/*.js',
+				'app/*.js',
 				'config/*.js',
 				'index.js',
-				'models/*.js',
 				'public/js/**/*.js',
 				'!public/js/vendor/*.js'
 			]
@@ -140,7 +123,7 @@ module.exports = function(grunt) {
 			}
 		},
 		watch: {
-			files: ['index.coffee', 'libs/*.coffee', 'tests/**/*.coffee', 'controllers/**/*.coffee','public/**/*.coffee', 'public/css/dev/**/*.less', 'models/**/*.coffee', 'middlewares/**/*.coffee'],
+			files: ['index.coffee', 'tests/**/*.coffee', 'public/**/*.coffee', 'public/css/dev/**/*.less', 'app/**/*.coffee'],
 			tasks: ['coffeelint',  'coffee', 'mochaTest', 'concat:allLessFilesToOneMain','less:development']
 		}
 	});
