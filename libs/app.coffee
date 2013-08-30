@@ -1,5 +1,6 @@
 app = module.exports = require("./express")
 fileLoader = require("./fileLoader")
+routes = require("./routes")
 
 # An Array with all Mongoose Model Objects
 models = fileLoader.getFilesFor('models')
@@ -10,5 +11,4 @@ controllers = fileLoader.getFilesFor('controllers')
 # Require all available middlewares
 middlewares = fileLoader.getFilesFor('middlewares')
 
-routes = require("./routes")
 routes(app, controllers, middlewares)

@@ -22,13 +22,12 @@ module.exports = function(grunt) {
 				},
 				'indentation': {
 					'level': 'ignore'
-				}
-				,
+				},
 				'max_line_length': {
 					'level': 'ignore'
 				}
 			},
-			app: ['index.coffee', 'libs/*.coffee', 'tests/**/*.coffee', 'controllers/**/*.coffee', 'public/**/*.coffee', 'models/**/*.coffee']
+			app: ['index.coffee', 'libs/*.coffee', 'tests/**/*.coffee', 'controllers/**/*.coffee', 'public/**/*.coffee', 'models/**/*.coffee' , 'middlewares/**/*.coffee']
 		},
 		karma: {
 			single: {
@@ -141,8 +140,8 @@ module.exports = function(grunt) {
 			}
 		},
 		watch: {
-			files: ['index.coffee', 'libs/*.coffee', 'tests/**/*.coffee', 'controllers/**/*.coffee','public/**/*.coffee', 'public/css/dev/**/*.less', 'models/**/*.coffee'],
-			tasks: ['coffeelint', 'mochaTest', 'concat:allLessFilesToOneMain','less:development', 'coffee', 'karma:single']
+			files: ['index.coffee', 'libs/*.coffee', 'tests/**/*.coffee', 'controllers/**/*.coffee','public/**/*.coffee', 'public/css/dev/**/*.less', 'models/**/*.coffee', 'middlewares/**/*.coffee'],
+			tasks: ['coffeelint',  'coffee', 'mochaTest', 'concat:allLessFilesToOneMain','less:development']
 		}
 	});
 
@@ -158,7 +157,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
-	grunt.registerTask('test', ['env:development', 'coffeelint', 'coffee', 'mochaTest', 'karma:single']);
+	grunt.registerTask('test', ['env:development', 'coffeelint', 'coffee', 'mochaTest']);
 	grunt.registerTask('production', ['env:production','coffee','copy:development', 'requirejs', 'copy:production', 'concat:allLessFilesToOneMain', 'less:production']);
 	grunt.registerTask('development', ['env:development', 'coffee', 'copy:development', 'concat:allLessFilesToOneMain', 'less:development']);
 	grunt.registerTask('default', ['test', 'development',  'watch', 'clean']);
