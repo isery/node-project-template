@@ -46,6 +46,7 @@
     "less": "1.3.x",
     "supertest": "~0.7.1",
     "lodash": "~1.3.1",
+		"loadfiles": "latest",
     "request": "~2.27.0"
   }
 }

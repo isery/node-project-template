@@ -7,9 +7,9 @@ fruits = require('../models/fruits')
 
 ###*
 	** @api {get} /fruits/ Get all fruits
-  * @apiVersion 0.0.1
+	* @apiVersion 0.0.1
 	* @apiName getAll
-  *
+	*
 	*
 	* @apiDescription Get all fruits
 	*
@@ -45,24 +45,24 @@ exports.getAll = (request, response) ->
 
 ###*
 	** @api {get} /fruits/:id Get fruit
-  * @apiVersion 0.0.1
+	* @apiVersion 0.0.1
 	* @apiName get
 	*
 	* @apiDescription Get one fruit
 	*
-  * @apiParam {Number} id id of the fruit
-  *
-  * @apiSuccess {Array}	result	requested data
-  *	@apiExample Example usage:
+	* @apiParam {Number} id id of the fruit
+	*
+	* @apiSuccess {Array}	result	requested data
+	*	@apiExample Example usage:
 	*		curl -X GET -H Content-Type: application/json"  http://localhost/fruits/1
-  *
+	*
 	* @apiSuccessExample Success-Response:
 	*     HTTP/1.1 200 OK
 	*     {
 	*       "result": [{"id" : 1, "name": "apple"}]
 	*     }
-  *
-  * @apiError NoValidId The given ID is invalid
+	*
+	* @apiError NoValidId The given ID is invalid
 ###
 exports.get = (request, response) ->
 	id = parseInt(request.params.id)
@@ -77,26 +77,26 @@ exports.get = (request, response) ->
 
 ###*
 	** @api {post} /fruits/ Create fruit
-  * @apiVersion 0.0.1
+	* @apiVersion 0.0.1
 	* @apiName	post
 	*
 	* @apiDescription	Create one fruit
 	*
-  * @apiParam	{String}	name name of the fruit
-  *
-  * @apiSuccess	{Array}	result	created fruit
-  *
-  * @apiExample Example usage:
+	* @apiParam	{String}	name name of the fruit
+	*
+	* @apiSuccess	{Array}	result	created fruit
+	*
+	* @apiExample Example usage:
 	*		curl -X POST -H "Content-Type: application/json" -d '{"name":"coconut"}' http://localhost/fruits/
-  *
+	*
 	* @apiSuccessExample Success-Response:
 	*     HTTP/1.1 200 OK
 	*     {
 	*       "result": [{"id" : 3, "name" : "coconut"}]
 	*     }
-  *
-  * @apiError	InvalidParamsName	The given name is invalid
-  * @apiErrorExample Response (example):
+	*
+	* @apiError	InvalidParamsName	The given name is invalid
+	* @apiErrorExample Response (example):
 	*     HTTP/1.1 400 Bad Request
 	*     {
 	*       "error": "InvalidParamsName"
@@ -113,27 +113,27 @@ exports.post = (request, response) ->
 
 ###*
 	** @api {put} /fruits/:id Update fruit
-  * @apiVersion 0.0.1
+	* @apiVersion 0.0.1
 	* @apiName put
 	*
 	* @apiDescription Update one fruit
 	*
-  * @apiParam {Number}	id	id of the fruit
-  * @apiParam {String}	name	name of the fruit
-  *
-  * @apiSuccess {Array}	result	updated fruit
-  * @apiExample Example usage:
+	* @apiParam {Number}	id	id of the fruit
+	* @apiParam {String}	name	name of the fruit
+	*
+	* @apiSuccess {Array}	result	updated fruit
+	* @apiExample Example usage:
 	*		curl -X PUT -H "Content-Type: application/json" -d '{"name":"pear"}' http://localhost/fruits/3
-  *
+	*
 	* @apiSuccessExample Success-Response:
 	*     HTTP/1.1 200 OK
 	*     {
 	*       "result": [{"id" : 3, "name" : "pear"}}]
 	*     }
-  *
-  *
-  * @apiError InvalidParamsName The given name is invalid
-  * @apiError InvalidParamsId The given ID is invalid
+	*
+	*
+	* @apiError InvalidParamsName The given name is invalid
+	* @apiError InvalidParamsId The given ID is invalid
 ###
 exports.put = (request, response) ->
 	id = parseInt(request.params.id)
@@ -151,24 +151,24 @@ exports.put = (request, response) ->
 
 ###*
 	** @api {delete} /fruits/:id Delete fruit
-  * @apiVersion 0.0.1
+	* @apiVersion 0.0.1
 	* @apiName delete
 	*
 	* @apiDescription Delete one fruit
 	*
-  * @apiParam {Number}	id id of the fruit
-  *
-  * @apiSuccess {Array}	result deleted fruit
-  *	@apiExample Example usage:
+	* @apiParam {Number}	id id of the fruit
+	*
+	* @apiSuccess {Array}	result deleted fruit
+	*	@apiExample Example usage:
 	*		curl -X DELETE -H "Content-Type: application/json"  http://localhost/fruits/1
-  *
+	*
 	* @apiSuccessExample Success-Response:
 	*     HTTP/1.1 200 OK
 	*     {
 	*       "result": [{"id" : 1}]
 	*     }
-  *
-  * @apiError InvalidParamsId The given ID is invalid
+	*
+	* @apiError InvalidParamsId The given ID is invalid
 ###
 exports.delete = (request, response) ->
 	id = parseInt(request.params.id)

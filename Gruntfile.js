@@ -94,6 +94,7 @@ module.exports = function(grunt) {
 				'config/*.js',
 				'index.js',
 				'public/js/**/*.js',
+				'!app/doc/**/*.js',
 				'!public/js/vendor/*.js'
 			]
 		},
