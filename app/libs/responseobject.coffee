@@ -1,7 +1,5 @@
 class ResponseObject
-	constructor: (success, message, result) ->
-		@success = success
-		@message = message
+	constructor: (result) ->
 		@result = result
 
 module.exports = ResponseObject

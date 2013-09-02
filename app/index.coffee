@@ -5,7 +5,7 @@ express = require("express")
 http = require("http")
 path = require("path")
 
-fileloader = require("./libs/fileloader")
+fileloader = require("loadfiles")
 loadFilesFor = fileloader __dirname, 'js'
 routes = require("./routes")
 app = module.exports = express()

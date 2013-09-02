@@ -1,0 +1,314 @@
+[
+  {
+    "type": "delete",
+    "url": "/fruits/:id",
+    "title": "Delete fruit",
+    "version": "0.0.1",
+    "name": "delete",
+    "description": "Delete one fruit",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "field": "id",
+            "optional": false,
+            "description": "id of the fruit"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "field": "result",
+            "optional": false,
+            "description": "deleted fruit"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 200 OK\n   {\n     \"result\": [{\"id\" : 1}]\n   }\n"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\tcurl -X DELETE -H \"Content-Type: application/json\"  http://localhost/fruits/1\n"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "field": "InvalidParamsId",
+            "optional": false,
+            "description": "The given ID is invalid"
+          }
+        ]
+      }
+    },
+    "group": "fruits.js",
+    "filename": "./controllers/fruits.js"
+  },
+  {
+    "type": "get",
+    "url": "/fruits/:id",
+    "title": "Get fruit",
+    "version": "0.0.1",
+    "name": "get",
+    "description": "Get one fruit",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "field": "id",
+            "optional": false,
+            "description": "id of the fruit"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "field": "result",
+            "optional": false,
+            "description": "requested data"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 200 OK\n   {\n     \"result\": [{\"id\" : 1, \"name\": \"apple\"}]\n   }\n"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\tcurl -X GET -H Content-Type: application/json\"  http://localhost/fruits/1\n"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "field": "NoValidId",
+            "optional": false,
+            "description": "The given ID is invalid"
+          }
+        ]
+      }
+    },
+    "group": "fruits.js",
+    "filename": "./controllers/fruits.js"
+  },
+  {
+    "type": "get",
+    "url": "/fruits/",
+    "title": "Get all fruits",
+    "version": "0.0.1",
+    "name": "getAll",
+    "description": "Get all fruits",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "field": "result",
+            "optional": false,
+            "description": "requested data"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 200 OK\n   {\n     result: [\n       {\"id\" : 1, \"name\":\"apple\"},\n       {\"id\" : 2, \"name\":\"banana\"}\n     ]\n   }\n"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\tcurl -X GET -H Content-Type: application/json\"  http://localhost/fruits/\n"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "field": "NoData",
+            "optional": false,
+            "description": "No data available"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "   HTTP/1.1 400 Bad Request\n   {\n     \"error\": \"NoData\"\n   }\n"
+        }
+      ]
+    },
+    "group": "fruits.js",
+    "filename": "./controllers/fruits.js"
+  },
+  {
+    "type": "post",
+    "url": "/fruits/",
+    "title": "Create fruit",
+    "version": "0.0.1",
+    "name": "post",
+    "description": "Create one fruit",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "name",
+            "optional": false,
+            "description": "name of the fruit"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "field": "result",
+            "optional": false,
+            "description": "created fruit"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 200 OK\n   {\n     \"result\": [{\"id\" : 3, \"name\" : \"coconut\"}]\n   }\n"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\tcurl -X POST -H \"Content-Type: application/json\" -d '{\"name\":\"coconut\"}' http://localhost/fruits/\n"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "field": "InvalidParamsName",
+            "optional": false,
+            "description": "The given name is invalid"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Response (example):",
+          "content": "   HTTP/1.1 400 Bad Request\n   {\n     \"error\": \"InvalidParamsName\"\n   }\n"
+        }
+      ]
+    },
+    "group": "fruits.js",
+    "filename": "./controllers/fruits.js"
+  },
+  {
+    "type": "put",
+    "url": "/fruits/:id",
+    "title": "Update fruit",
+    "version": "0.0.1",
+    "name": "put",
+    "description": "Update one fruit",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "field": "id",
+            "optional": false,
+            "description": "id of the fruit"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "field": "name",
+            "optional": false,
+            "description": "name of the fruit"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "field": "result",
+            "optional": false,
+            "description": "updated fruit"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 200 OK\n   {\n     \"result\": [{\"id\" : 3, \"name\" : \"pear\"}}]\n   }\n"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "\tcurl -X PUT -H \"Content-Type: application/json\" -d '{\"name\":\"pear\"}' http://localhost/fruits/3\n"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "field": "InvalidParamsName",
+            "optional": false,
+            "description": "The given name is invalid"
+          },
+          {
+            "group": "Error 4xx",
+            "field": "InvalidParamsId",
+            "optional": false,
+            "description": "The given ID is invalid"
+          }
+        ]
+      }
+    },
+    "group": "fruits.js",
+    "filename": "./controllers/fruits.js"
+  }
+]
