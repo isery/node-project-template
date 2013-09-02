@@ -1,3 +1,3 @@
-Check out the branches for different project setups
-======================================i
+### Check out the branches for different project setups
+======================================
 
